@@ -1,0 +1,648 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head profile="http://www.w3.org/2006/03/hcard http://dublincore.org/documents/2008/08/04/dc-html/">
+  <meta http-equiv="Content-Type" content="text/html; charset=us-ascii" />
+
+  <title>First-Party Sets and SameSite Cookies</title>
+
+  
+<style type="text/css">/*<![CDATA[*/
+
+body {
+  font: 16px "Helvetica Neue","Open Sans",Helvetica,Calibri,sans-serif;
+  color: #333;
+  font-size-adjust: 0.5;
+  line-height: 24px;
+  margin: 75px auto;
+  max-width: 624px;
+  padding: 0 5px;
+}
+
+.title, .filename, h1, h2, h3, h4, h5 {
+  font: 16px "Roboto Condensed","Helvetica Neue","Open Sans",Helvetica,Calibri,sans-serif;
+  font-size-adjust: 0.5;
+  font-weight: bold;
+  color: #333;
+  line-height: 100%;
+  margin: 1.2em 0 0.3em;
+}
+.title, #rfc\.title h1 { font-size: 32px; }
+h1, section h1, h2, section h2, section h3, nav h2 { font-size: 20px; }
+h3, section h4, h4, section h5 { font-size: 16px; }
+h1 a[href], h2 a[href], h3 a[href], h4 a[href] {
+  color: #333;
+}
+
+table {
+  margin-left: 0em;
+  border-collapse: collapse;
+}
+th {
+  text-align: left;
+  border-bottom: 2px solid #ddd;
+}
+td {
+  border-top: 1px solid #ddd;
+  vertical-align: top;
+}
+tr:nth-child(2n+1) > td,
+tr:nth-child(2n+1) > th {
+  background-color: #f9f9f9;
+}
+td.reference {
+  max-width: 200px;
+  border-top: none;
+  padding-right: 1em;
+}
+.right {
+  text-align: right;
+}
+
+
+table.header, table#rfc\.headerblock {
+  width: 100%;
+}
+table.header td, table#rfc\.headerblock td {
+  border: none;
+  background-color: transparent;
+  color: black;
+  padding: 0;
+}
+.filename {
+  display: block;
+  color: rgb(119, 119, 119);
+  font-size: 20px;
+  font-weight: normal;
+  line-height: 100%;
+  margin: 10px 0 32px;
+}
+#rfc\.abstract+p, #rfc\.abstract+p code, #rfc\.abstract+p samp, #rfc\.abstract+p tt {
+  font-size: 20px;
+  line-height: 28px;
+}
+
+samp, tt, code, pre, span.tt {
+  font-size: 13.5px;
+  font-family: Consolas, monospace;
+  font-size-adjust: none;
+}
+pre {
+  background-color: #eee;
+  border: 1px solid #ddd;
+  overflow-x: auto;
+  padding: 5px;
+  margin: 5px;
+}
+.figure, caption {
+  font-style: italic;
+  margin: 0 1.5em;
+  text-align: left;
+}
+
+address {
+  margin: 16px 2px;
+  line-height: 20px;
+}
+.vcard {
+  font-style: normal;
+}
+.vcardline {
+  display: block;
+}
+.vcardline .fn, address b {
+  font-weight: normal;
+}
+.vcardline .hidden {
+  display: none;
+}
+
+dl {
+  margin-left: 1em;
+}
+dl.dl-horizontal: {
+  margin-left: 0;
+}
+dl > dt {
+  float: left;
+  margin-right: 1em;
+}
+dl.nohang > dt {
+  float: none;
+}
+dl > dd {
+  margin-bottom: .5em;
+}
+dl.compact > dd {
+  margin-bottom: 0em;
+}
+dl > dd > dl {
+  margin-top: 0.5em;
+  margin-bottom: 0em;
+}
+ul.empty {
+  list-style-type: none;
+}
+ul.empty li {
+  margin-top: .5em;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid #eee;
+}
+hr.noprint {
+  display: none;
+}
+
+a {
+  text-decoration: none;
+}
+a[href] {
+  color: #2a6496;
+}
+a[href]:hover {
+  background-color: #eee;
+}
+
+p, ol, ul, li {
+  padding: 0;
+}
+p {
+  margin: 0.5em 0;
+}
+ol, ul {
+  margin: 0.2em 0 0.2em 2em;
+}
+li {
+  margin: 0.2em 0;
+}
+address {
+  font-style: normal;
+}
+
+ul.toc ul {
+  margin: 0 0 0 2em;
+}
+ul.toc li {
+  list-style: none;
+  margin: 0;
+}
+
+@media screen and (min-width: 924px) {
+  body {
+    padding-right: 350px;
+  }
+  body>ul.toc, body>#rfc\.toc {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    right: calc(50vw - 500px);
+    width: 300px;
+    z-index: 1;
+    overflow: auto;
+    overscroll-behavior: contain;
+  }
+  body>#rfc\.toc {
+    top: 55px;
+  }
+  body>ul.toc {
+    top: 100px;
+  }
+
+  ul.toc {
+    margin: 0 0 0 4px;
+    font-size: 12px;
+    line-height: 20px;
+  }
+  ul.toc ul {
+    margin-left: 1.2em;
+  }
+}
+
+.github-fork-ribbon-wrapper {
+  display: none;
+}
+@media screen and (min-width: 800px) {
+  /* "Fork me on GitHub" CSS ribbon based on
+   * https://github.com/simonwhitaker/github-fork-ribbon-css
+   */
+  .github-fork-ribbon {
+    position: absolute;
+    padding: 2px 0;
+    background-color: #a00;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15));
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.5);
+    font: 700 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+    pointer-events: auto;
+
+    top: 38px;
+    right: -45px;
+
+    transform: rotate(45deg);
+  }
+
+  .github-fork-ribbon a[href],
+  .github-fork-ribbon a[href]:hover {
+    color: #fff;
+    background-color: transparent;
+    text-decoration: none;
+    text-shadow: 0 -1px rgba(0, 0, 0, 0.5);
+    text-align: center;
+
+    width: 190px;
+    line-height: 18px;
+
+    display: inline-block;
+    padding: 2px 0;
+
+    border: 1.5px dotted #fff;
+    border-color: rgba(255, 255, 255, 0.6);
+  }
+
+  .github-fork-ribbon-wrapper {
+    display: block;
+    width: 130px;
+    height: 130px;
+    position: absolute;
+    overflow: hidden;
+    top: 0; right: 0;
+    z-index: 2;
+    pointer-events: none;
+  }
+}
+@media screen and (min-width: 1000px) {
+  .github-fork-ribbon-wrapper {
+    position: fixed;
+  }
+/*]]>*/</style>
+<meta name="viewport" content="initial-scale=1.0">
+
+
+  <link href="#rfc.toc" rel="Contents">
+<link href="#rfc.section.1" rel="Chapter" title="1 Introduction">
+<link href="#rfc.section.2" rel="Chapter" title="2 Conventions and Definitions">
+<link href="#rfc.section.2.1" rel="Chapter" title="2.1 Conformance">
+<link href="#rfc.section.2.2" rel="Chapter" title="2.2 Syntax">
+<link href="#rfc.section.2.3" rel="Chapter" title="2.3 Terms">
+<link href="#rfc.section.3" rel="Chapter" title="3 The &#8220;FirstParty&#8221; value of the &#8220;SameSite&#8221; attribute">
+<link href="#rfc.section.4" rel="Chapter" title="4 Security and Privacy Considerations">
+<link href="#rfc.section.4.1" rel="Chapter" title="4.1 CSRF">
+<link href="#rfc.section.4.2" rel="Chapter" title="4.2 Secure Transport">
+<link href="#rfc.section.5" rel="Chapter" title="5 IANA Considerations">
+<link href="#rfc.references" rel="Chapter" title="6 References">
+<link href="#rfc.references.1" rel="Chapter" title="6.1 Normative References">
+<link href="#rfc.references.2" rel="Chapter" title="6.2 Informative References">
+<link href="#rfc.acknowledgments" rel="Chapter">
+<link href="#rfc.authors" rel="Chapter">
+
+
+  <meta name="generator" content="xml2rfc version 2.14.1 - https://tools.ietf.org/tools/xml2rfc" />
+  <link rel="schema.dct" href="http://purl.org/dc/terms/" />
+
+  <meta name="dct.creator" content="West, M." />
+  <meta name="dct.identifier" content="urn:ietf:id:draft-west-cookie-samesite-firstparty-latest" />
+  <meta name="dct.issued" scheme="ISO8601" content="2019-07" />
+  <meta name="dct.abstract" content="This document proposes the addition of two new values to the " />
+  <meta name="description" content="This document proposes the addition of two new values to the " />
+
+</head>
+
+<body>
+
+  <table class="header">
+    <tbody>
+    
+    	<tr>
+<td class="left">Network Working Group</td>
+<td class="right">M. West</td>
+</tr>
+<tr>
+<td class="left">Internet-Draft</td>
+<td class="right">Google</td>
+</tr>
+<tr>
+<td class="left">Intended status: Standards Track</td>
+<td class="right">May 7, 2019</td>
+</tr>
+<tr>
+<td class="left">Expires: November 8, 2019</td>
+<td class="right"></td>
+</tr>
+
+    	
+    </tbody>
+  </table>
+
+  <p class="title">First-Party Sets and SameSite Cookies<br />
+  <span class="filename">draft-west-cookie-samesite-firstparty-latest</span></p>
+  
+  <h1 id="rfc.abstract"><a href="#rfc.abstract">Abstract</a></h1>
+<p>This document proposes the addition of two new values to the <samp>SameSite</samp> cookie attribute defined in RFC6265bis <a href="#I-D.ietf-httpbis-rfc6265bis" class="xref">[I-D.ietf-httpbis-rfc6265bis]</a>: <samp>FirstPartyLax</samp> and <samp>FirstPartyStrict</samp>. These values are conceptually similar to the existing <samp>Lax</samp> and <samp>Strict</samp> values, but base the delivery checks on the First-Party Sets <a href="#first-party-set" class="xref">[first-party-set]</a> of a request&#8217;s initiator and target, rather than on their respective registrable domains. This widens the scope of a given cookie&#8217;s applicability, enabling entities that have sharded themselves across multiple registrable domains to maintain HTTP state without exposing themselves to the risks of <samp>SameSite=None</samp>.</p>
+<h1 id="rfc.status"><a href="#rfc.status">Status of This Memo</a></h1>
+<p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
+<p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at https://datatracker.ietf.org/drafts/current/.</p>
+<p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
+<p>This Internet-Draft will expire on November 8, 2019.</p>
+<h1 id="rfc.copyrightnotice"><a href="#rfc.copyrightnotice">Copyright Notice</a></h1>
+<p>Copyright (c) 2019 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
+<p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (https://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
+
+  
+  <hr class="noprint" />
+  <h1 class="np" id="rfc.toc"><a href="#rfc.toc">Table of Contents</a></h1>
+  <ul class="toc">
+
+  	<li>1.   <a href="#rfc.section.1">Introduction</a>
+</li>
+<li>2.   <a href="#rfc.section.2">Conventions and Definitions</a>
+</li>
+<ul><li>2.1.   <a href="#rfc.section.2.1">Conformance</a>
+</li>
+<li>2.2.   <a href="#rfc.section.2.2">Syntax</a>
+</li>
+<li>2.3.   <a href="#rfc.section.2.3">Terms</a>
+</li>
+</ul><li>3.   <a href="#rfc.section.3">The &#8220;FirstParty&#8221; value of the &#8220;SameSite&#8221; attribute</a>
+</li>
+<li>4.   <a href="#rfc.section.4">Security and Privacy Considerations</a>
+</li>
+<ul><li>4.1.   <a href="#rfc.section.4.1">CSRF</a>
+</li>
+<li>4.2.   <a href="#rfc.section.4.2">Secure Transport</a>
+</li>
+</ul><li>5.   <a href="#rfc.section.5">IANA Considerations</a>
+</li>
+<li>6.   <a href="#rfc.references">References</a>
+</li>
+<ul><li>6.1.   <a href="#rfc.references.1">Normative References</a>
+</li>
+<li>6.2.   <a href="#rfc.references.2">Informative References</a>
+</li>
+</ul><li><a href="#rfc.acknowledgments">Acknowledgments</a>
+</li>
+<li><a href="#rfc.authors">Author's Address</a>
+</li>
+
+
+  </ul>
+
+  <h1 id="rfc.section.1">
+<a href="#rfc.section.1">1.</a> <a href="#introduction" id="introduction">Introduction</a>
+</h1>
+<p id="rfc.section.1.p.1">The <samp>SameSite</samp> attribute enables developers to limit the scope of a given cookie&#8217;s delivery, mitigating the risks of some classes of cross-site request forgery (CSRF) attack by preventing certain cookies from being delivered along with requests that are initiated from a cross-site context.</p>
+<p id="rfc.section.1.p.2">For example, consider the exciting and dynamic <samp>https://internet-bookstore.example/</samp>, which uses <samp>SameSite=Lax</samp> cookies as one layer in its defense against CSRF attack. If <samp>https://example.com</samp> includes resources from <samp>https://internet-bookstore.example/</samp>, the request will be considered cross-site, and the authentication cookies will not be delivered. Without that state, CSRF attacks will be significantly less effective.</p>
+<p id="rfc.section.1.p.3">When the site expands into new locations, it may wish to register a domain under a localized TLD, perhaps <samp>https://internet-bookstore.&#27979;&#35797;/</samp>. Likewise, it may decide to shard itself into distinct brands, like <samp>https://internet-things-other-than-books-store.example/</samp>.  Though the same entity controls each of these origins, they have distict registrable domains, and therefore the authentication cookie noted above will not be delivered from one site to resources on another. This frustrates a number of reasonable use cases, including single-sign on. Today, <samp>SameSite=None</samp> is necessary in order to support these use cases by enabling a given cookie to be delivered across registrable domains. <samp>SameSite=None</samp>, unfortunately, exposes the site to more risk than it would prefer, as it removes a layer of CSRF defense.</p>
+<p id="rfc.section.1.p.4">First-Party Sets <a href="#first-party-set" class="xref">[first-party-set]</a> proposes a mechanism by which developers can bind each of their distinct registrable domains into a set which mutually agrees to be treated as a single entity. It would be helpful if this concept could be folded into the <samp>SameSite</samp> attribute, perhaps via new <samp>FirstPartyLax</samp> and <samp>FirstPartyStrict</samp> values. These could be conceptually similar to the existing <samp>Lax</samp> and <samp>Strict</samp> values, but base their delivery checks on the First-Party Sets of a given request&#8217;s initiator and target, rather than on their respective registrable domains.</p>
+<p id="rfc.section.1.p.5">This document spells out that proposal in a bit more detail.</p>
+<h1 id="rfc.section.2">
+<a href="#rfc.section.2">2.</a> <a href="#conventions-and-definitions" id="conventions-and-definitions">Conventions and Definitions</a>
+</h1>
+<h1 id="rfc.section.2.1">
+<a href="#rfc.section.2.1">2.1.</a> <a href="#conformance" id="conformance">Conformance</a>
+</h1>
+<p id="rfc.section.2.1.p.1">The key words &#8220;MUST&#8221;, &#8220;MUST NOT&#8221;, &#8220;REQUIRED&#8221;, &#8220;SHALL&#8221;, &#8220;SHALL NOT&#8221;, &#8220;SHOULD&#8221;, &#8220;SHOULD NOT&#8221;, &#8220;RECOMMENDED&#8221;, &#8220;NOT RECOMMENDED&#8221;, &#8220;MAY&#8221;, and &#8220;OPTIONAL&#8221; in this document are to be interpreted as described in BCP&#160;14 <a href="#RFC2119" class="xref">[RFC2119]</a> <a href="#RFC8174" class="xref">[RFC8174]</a> when, and only when, they appear in all capitals, as shown here.</p>
+<h1 id="rfc.section.2.2">
+<a href="#rfc.section.2.2">2.2.</a> <a href="#syntax" id="syntax">Syntax</a>
+</h1>
+<p id="rfc.section.2.2.p.1">This document adjusts some syntax from <a href="#I-D.ietf-httpbis-rfc6265bis" class="xref">[I-D.ietf-httpbis-rfc6265bis]</a>, and in doing so, relies upon the Augmented Backus-Naur Form (ABNF) notation of <a href="#RFC5234" class="xref">[RFC5234]</a>.</p>
+<h1 id="rfc.section.2.3">
+<a href="#rfc.section.2.3">2.3.</a> <a href="#terms" id="terms">Terms</a>
+</h1>
+<p id="rfc.section.2.3.p.1">HTTP requests are considered &#8220;same-site&#8221; or &#8220;cross-site&#8221;, as defined in <a href="#I-D.ietf-httpbis-rfc6265bis" class="xref">[I-D.ietf-httpbis-rfc6265bis]</a>.</p>
+<p id="rfc.section.2.3.p.2">First-Party Sets are defined in <a href="#first-party-set" class="xref">[first-party-set]</a>. Two origins (&#8220;A&#8221; and &#8220;B&#8221;) are said to be in the same first-party set if the first-party set associated with &#8220;A&#8221; contains &#8220;B&#8221;.</p>
+<p id="rfc.section.2.3.p.3">A request is considered to be &#8220;first-party&#8221; if the target origin is in the same first-party set as the request&#8217;s initiator, and &#8220;third-party&#8221; otherwise. That is, for a given request (&#8220;r&#8221;), the following algorithm returns <samp>first-party</samp> or <samp>third-party</samp>:</p>
+<p></p>
+
+<ol>
+<li>If <samp>request</samp> is &#8220;same-site&#8221;, return &#8220;first-party&#8221;.</li>
+<li>Let <samp>target</samp> be <samp>r</samp>&#8217;s current URL&#8217;s origin.</li>
+<li>If <samp>target</samp> is in the same first-party set as <samp>r</samp>&#8217;s client&#8217;s origin, return <samp>first-party</samp>.</li>
+<li>Return <samp>third-party</samp>.</li>
+</ol>
+<p id="rfc.section.2.3.p.5">A document is considered &#8220;first-party with its ancestors&#8221; if its origin is in the same First-Party Set with the origins of each of the document&#8217;s ancestors <a href="#HTML" class="xref">[HTML]</a>. That is, for a given document (&#8220;d&#8221;), the following algorithm returns <samp>first-party</samp> or <samp>third-party</samp>:</p>
+<p></p>
+
+<ol>
+<li>If <samp>d</samp>&#8217;s browsing context is a top-level browsing context, return <samp>first-party</samp>.</li>
+<li>Let <samp>set</samp> be <samp>d</samp>&#8217;s origin&#8217;s First-Party Set.</li>
+<li>For each <samp>ancestor</samp> in <samp>d</samp>&#8217;s browsing context&#8217;s ancestor browsing contexts:  <ol><li>If <samp>ancestor</samp>&#8217;s active document&#8217;s origin is not contained within <samp>set</samp>, return <samp>third-party</samp>.</li></ol>
+</li>
+<li>Return <samp>first-party</samp>.</li>
+</ol>
+<p id="rfc.section.2.3.p.7">ISSUE: Move these definitions to the First-Party Sets spec, when one exists.</p>
+<h1 id="rfc.section.3">
+<a href="#rfc.section.3">3.</a> <a href="#the-firstparty-value-of-the-samesite-attribute" id="the-firstparty-value-of-the-samesite-attribute">The &#8220;FirstParty&#8221; value of the &#8220;SameSite&#8221; attribute</a>
+</h1>
+<p><a href="#I-D.ietf-httpbis-rfc6265bis" class="xref">[I-D.ietf-httpbis-rfc6265bis]</a> defines three values for cookies&#8217; <samp>SameSite</samp> attribute: <samp>None</samp>, which enables delivery for same-site and cross-site requests; <samp>Strict</samp>, which enables delivery only for same-site requests; and <samp>Lax</samp>, which enables delivery for same-site requests as well as for cross-site top-level navigations.</p>
+<p id="rfc.section.3.p.2">In the presence of first-party sets, it makes sense to extend this syntax a bit to include <samp>FirstParty</samp>, which will allow delivery of cookies within a first-party set, and therefore will support the use cases that first-party sets addresses (a given first-party&#8217;s single sign-on, for instance). For example, given two distinct origins <samp>https://sso.example/</samp> and <samp>https://application.example/</samp> that are contained in the same first-party set:</p>
+<p></p>
+
+<ul>
+<li>Requests from <samp>https://application.example/</samp> to <samp>https://sso.example/</samp> may not contain any cookies set with <samp>SameSite=Lax</samp> or <samp>SameSite=Strict</samp>, but only those set as <samp>SameSite=None</samp>.</li>
+<li>Requests from <samp>https://application.example/</samp> to <samp>https://sso.example/</samp> may contain any cookies set with <samp>SameSite=FirstParty</samp> or <samp>SameSite=None</samp>.</li>
+</ul>
+<p id="rfc.section.3.p.4">To implement this change, adjust <a href="#I-D.ietf-httpbis-rfc6265bis" class="xref">[I-D.ietf-httpbis-rfc6265bis]</a> as follows:</p>
+<p id="rfc.section.3.p.5">First, change the <samp>samesite-value</samp> definition from:</p>
+<pre>
+samesite-value    = "Strict" / "Lax" / "None"
+</pre>
+<p id="rfc.section.3.p.6">to:</p>
+<pre>
+samesite-value    = "Lax" / "Strict" / "FirstPartyLax" / "FirstPartyStrict" / "None"
+</pre>
+<p id="rfc.section.3.p.7">Second, alter the <samp>SameSite</samp> attribute&#8217;s processing algorithm (Section 5.3.7 of <a href="#I-D.ietf-httpbis-rfc6265bis" class="xref">[I-D.ietf-httpbis-rfc6265bis]</a>) to add a new step 4 and 5:</p>
+<pre>
+4.  If cookie-av's attribute-value is a case-insensitive
+    match for "FirstPartyLax", set `enforcement` to "FirstPartyLax".
+
+5.  If cookie-av's attribute-value is a case-insensitive
+    match for "FirstPartyStrict", set `enforcement` to "FirstPartyStrict".
+</pre>
+<p id="rfc.section.3.p.8">Third, alter the cookie storage model (Section 5.4 of <a href="#I-D.ietf-httpbis-rfc6265bis" class="xref">[I-D.ietf-httpbis-rfc6265bis]</a>) as follows:</p>
+<p id="rfc.section.3.p.9">Change step 14.1 from:</p>
+<pre>
+1.  If the cookie was received from a "non-HTTP" API, and
+    the API was called from a context whose "site for
+    cookies" is not an exact match for request-uri's host's
+    registered domain, then abort these steps and ignore the
+    newly created cookie entirely.
+</pre>
+<p id="rfc.section.3.p.10">to:</p>
+<pre>
+1.  If the cookie was received from a "non-HTTP" API:
+
+    1.  If the cookie's `same-site-flag` is "Lax" or
+        "Strict", and the API was called from a context
+        whose "site for cookies" is not an exact match for
+        request-uri's host's registered domain, then abort
+        these steps and ignore the newly-created cookie
+        entirely.
+
+    2.  If the cookie's same-site-flag` is "FirstPartyLax"
+        or "FirstPartyStrict", and the API was called from
+        a context that is not first-party with its
+        ancestors, then abort these steps and ignore the
+        newly-created cookie entirely.
+</pre>
+<p id="rfc.section.3.p.11">Change step 14.2 from:</p>
+<pre>
+2.  If the cookie was received from a "same-site" request,
+    skip the remaining substeps and continue processing the
+    cookie.
+</pre>
+<p id="rfc.section.3.p.12">to:</p>
+<pre>
+2.  If the cookie's `same-site-flag` is "Lax" or "Strict",
+    and the cookie was received from a "same-site" request,
+    then skip the remaining substeps and continue processing
+    the cookie.
+</pre>
+<p id="rfc.section.3.p.13">Add a new step 14.3 after the new step 14.2:</p>
+<pre>
+3.  If the cookie's `same-site-flag` is "FirstPartyLax" or
+    "FirstPartyStrict", and the cookie was received from a
+    "first-party" request, then skip the remaining substeps
+    and continue processing the cookie.
+</pre>
+<p id="rfc.section.3.p.14">Fourth, alter the last conditional in step 1 if the <samp>Cookie</samp> header algorithm (Section 5.5 of <a href="#I-D.ietf-httpbis-rfc6265bis" class="xref">[I-D.ietf-httpbis-rfc6265bis]</a>) from:</p>
+<pre>
+*   If the cookie's same-site-flag is not "None", and the
+    HTTP request is cross-site then exclude the cookie
+    unless all of the following statements hold:
+    
+    1.  The same-site-flag is "Lax".
+
+    2.  The HTTP request's method is "safe".
+
+    3.  The HTTP request's target browsing context is a
+        top-level browsing context.
+</pre>
+<p id="rfc.section.3.p.15">to:</p>
+<pre>
+*   If the HTTP request is cross-site, then exclude the
+    cookie unless one of the following statements holds:
+
+    1.  The cookie's `same-site-flag` is "None".
+
+    2.  The cookie's `same-site-flag` is either "Lax" or
+        "FirstPartyLax", the HTTP request's method is
+        "safe", and the HTTP request's target browsing
+        context is a top-level browsing context.
+
+    3.  The cookie's `same-site-flag` is either
+        "FirstPartyLax" or "FirstPartyStrict", and the HTTP
+        request is a first-party request.
+</pre>
+<h1 id="rfc.section.4">
+<a href="#rfc.section.4">4.</a> <a href="#security-and-privacy-considerations" id="security-and-privacy-considerations">Security and Privacy Considerations</a>
+</h1>
+<h1 id="rfc.section.4.1">
+<a href="#rfc.section.4.1">4.1.</a> <a href="#csrf" id="csrf">CSRF</a>
+</h1>
+<p id="rfc.section.4.1.p.1">Both <samp>FirstPartyLax</samp> and <samp>FirstPartyStrict</samp> provide weaker defenses against CSRF than their <samp>Lax</samp> and <samp>Strict</samp> counterparts, as they enable authenticated requests from a larger set of initiating contexts. That said, they also provide deployment benefits, as they&#8217;re usable in some contexts where <samp>Lax</samp> and <samp>Strict</samp> would be too restrictive (e.g. the localized registrable domains in the introduction).</p>
+<h1 id="rfc.section.4.2">
+<a href="#rfc.section.4.2">4.2.</a> <a href="#secure-transport" id="secure-transport">Secure Transport</a>
+</h1>
+<p id="rfc.section.4.2.p.1">First-Party Sets can only be created for secure origins, as unauthenticated transport doesn&#8217;t give any guarantees that the assertions we use to build the set are in fact being delivered by the entity which controls the server. This has the side-effect of ensuring that <samp>FirstPartyLax</samp> and <samp>FirstPartyStrict</samp> cookies can only be delivered to secure cross-site origins, which has the exciting side effect of providing limited mitigation of monitoring by network attackers <a href="#RFC7258" class="xref">[RFC7258]</a>.</p>
+<h1 id="rfc.section.5">
+<a href="#rfc.section.5">5.</a> <a href="#iana-considerations" id="iana-considerations">IANA Considerations</a>
+</h1>
+<p id="rfc.section.5.p.1">This document has no IANA actions.</p>
+<h1 id="rfc.references">
+<a href="#rfc.references">6.</a> References</h1>
+<h1 id="rfc.references.1">
+<a href="#rfc.references.1">6.1.</a> Normative References</h1>
+<table><tbody>
+<tr>
+<td class="reference"><b id="first-party-set">[first-party-set]</b></td>
+<td class="top">
+<a title="Google">West, M.</a>, "<a href="https://mikewest.github.io/first-party-sets/">First-Party Sets</a>", n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="I-D.ietf-httpbis-rfc6265bis">[I-D.ietf-httpbis-rfc6265bis]</b></td>
+<td class="top">
+<a>Barth, A.</a> and <a>M. West</a>, "<a href="https://tools.ietf.org/html/draft-ietf-httpbis-rfc6265bis-03">Cookies: HTTP State Management Mechanism</a>", Internet-Draft draft-ietf-httpbis-rfc6265bis-03, April 2019.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC2119">[RFC2119]</b></td>
+<td class="top">
+<a>Bradner, S.</a>, "<a href="https://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>", BCP 14, RFC 2119, DOI 10.17487/RFC2119, March 1997.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC5234">[RFC5234]</b></td>
+<td class="top">
+<a>Crocker, D.</a> and <a>P. Overell</a>, "<a href="https://tools.ietf.org/html/rfc5234">Augmented BNF for Syntax Specifications: ABNF</a>", STD 68, RFC 5234, DOI 10.17487/RFC5234, January 2008.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC8174">[RFC8174]</b></td>
+<td class="top">
+<a>Leiba, B.</a>, "<a href="https://tools.ietf.org/html/rfc8174">Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words</a>", BCP 14, RFC 8174, DOI 10.17487/RFC8174, May 2017.</td>
+</tr>
+</tbody></table>
+<h1 id="rfc.references.2">
+<a href="#rfc.references.2">6.2.</a> Informative References</h1>
+<table><tbody>
+<tr>
+<td class="reference"><b id="HTML">[HTML]</b></td>
+<td class="top">
+<a title="Google, Inc.">Hickson, I.</a>, <a title="Opera">Pieters, S.</a>, <a title="Mozilla">van Kesteren, A.</a>, <a title="Opera">J&#228;genstedt, P.</a> and <a title="Google, Inc.">D. Denicola</a>, "<a href="https://html.spec.whatwg.org/">HTML</a>", n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="I-D.west-http-state-tokens">[I-D.west-http-state-tokens]</b></td>
+<td class="top">
+<a>West, M.</a>, "<a href="https://tools.ietf.org/html/draft-west-http-state-tokens-00">HTTP State Tokens</a>", Internet-Draft draft-west-http-state-tokens-00, March 2019.</td>
+</tr>
+<tr>
+<td class="reference"><b id="mixed-content">[mixed-content]</b></td>
+<td class="top">
+<a title="Google">West, M.</a>, "<a href="https://w3c.github.io/webappsec-mixed-content/">Mixed Content</a>", n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="pref-cookie">[pref-cookie]</b></td>
+<td class="top">
+<a>Soltani, A.</a>, <a>Peterson, A.</a> and <a>B. Gellman</a>, "<a href="https://www.washingtonpost.com/news/the-switch/wp/2013/12/10/nsa-uses-google-cookies-to-pinpoint-targets-for-hacking/">NSA uses Google cookies to pinpoint targets for hacking</a>", December 2013.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC6265">[RFC6265]</b></td>
+<td class="top">
+<a>Barth, A.</a>, "<a href="https://tools.ietf.org/html/rfc6265">HTTP State Management Mechanism</a>", RFC 6265, DOI 10.17487/RFC6265, April 2011.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC7258">[RFC7258]</b></td>
+<td class="top">
+<a>Farrell, S.</a> and <a>H. Tschofenig</a>, "<a href="https://tools.ietf.org/html/rfc7258">Pervasive Monitoring Is an Attack</a>", BCP 188, RFC 7258, DOI 10.17487/RFC7258, May 2014.</td>
+</tr>
+</tbody></table>
+<h1 id="rfc.acknowledgments"><a href="#rfc.acknowledgments">Acknowledgments</a></h1>
+<p id="rfc.section.A.p.1">Conversations with a number of folks at 2019&#8217;s HTTP Workshop helped me clarify my thinking around the incremental improvements we can make to cookies. In particular, Martin Thomson and Anne van Kesteren provided insightful feedback.</p>
+<h1 id="rfc.authors"><a href="#rfc.authors">Author's Address</a></h1>
+<div class="avoidbreak">
+  <address class="vcard">
+	<span class="vcardline">
+	  <span class="fn">Mike West</span> 
+	  <span class="n hidden">
+		<span class="family-name">West</span>
+	  </span>
+	</span>
+	<span class="org vcardline">Google</span>
+	<span class="adr">
+	  
+	  <span class="vcardline">
+		<span class="locality"></span> 
+		<span class="region"></span>
+		<span class="code"></span>
+	  </span>
+	  <span class="country-name vcardline"></span>
+	</span>
+	<span class="vcardline">EMail: <a href="mailto:mkwst@google.com">mkwst@google.com</a></span>
+
+<span class="vcardline">URI: <a href="https://www.mikewest.org/">https://www.mikewest.org/</a></span>
+
+  </address>
+</div>
+
+</body>
+</html>
